@@ -1,19 +1,16 @@
-#include "gamestate.h"
+#include "Gamestate.h"
 
 int main()
 {
-
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	sf::RenderWindow window(sf::VideoMode(1600, 800), "Window");	// window
-	sf::Clock gameTime;												// timerr
+	sf::RenderWindow window(sf::VideoMode(1600, 800), "Fysik projekt Emma David");	// window
+	sf::Clock gameTime;																// timer
+	Game game;
 
-	Gamestate gameState;
-	gameState.initialize();
+	game;
+	game.initialize(); // set start angle, 
 
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-	int teste2 = 0;
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -23,10 +20,11 @@ int main()
 				window.close();
 		}
 
-		gameState.Update(gameTime.restart().asSeconds());
-		
+		// game code in here //
+		game.Update(gameTime.restart().asSeconds());
+
 		window.clear();
-		window.draw(gameState);
+		window.draw(game);
 		window.display();
 	}
 

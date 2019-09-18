@@ -1,23 +1,26 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-class Gamestate : public sf::Drawable
+#include <sstream>
+#include "Projectile.h"
+#include <iostream>
+
+class Game : public sf::Drawable
 {
 public:
-	Gamestate();
-	~Gamestate();
+	Game();
+	~Game();
 
-	bool initialize();
 	void Update(float dt);
+	bool initialize();
 
 private:
 	sf::Texture m_BackgroundTexture;
 	sf::Sprite m_BackgroundSprite;
-	//sf::Projectile m_Projectile;
+	Projectile m_Projectile;
 
-	sf::Text m_text;
-	//sf::ostringstream stream;
-	sf::Font m_font;
+	sf::Text text;
+	std::ostringstream stream;
+	sf::Font font;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
