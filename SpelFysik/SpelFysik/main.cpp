@@ -11,7 +11,6 @@ int main()
 	Gamestate gameState;
 	gameState.initialize();
 
-	// fåglöar
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 	int teste2 = 0;
