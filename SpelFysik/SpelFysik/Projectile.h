@@ -14,6 +14,9 @@
 #define ballWidth 0.1f			// Cannon ball width (m)
 #define ballMass 4.1f
 
+#define gunpowderAmount 300		// in grams
+#define startAngel      15		// degrees
+
 class Projectile : public sf::Drawable
 {
 public:

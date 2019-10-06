@@ -38,16 +38,16 @@ bool Game::initialize()
 {
 
 	float i, j, velocity;
-	std::cout << "Angle: ";
-	std::cin >> i;
+	//std::cout << "Angle: ";
+	//std::cin >> i;
 
-	std::cout << "Ammout of gumpowder: ";
-	std::cin >> j;
+	//std::cout << "Ammout of gumpowder: ";
+	//std::cin >> j;
+
+	i = startAngel;
+	j = gunpowderAmount;
 	
-
 	velocity = m_Projectile.calculateStartVelocity((int)j);
-
-	float test = cosf(i * PI / 180) * velocity;
 
 	m_Projectile.setStartAngle(sf::Vector2f(cosf(i * PI / 180) * velocity, sinf(i * PI / 180) * velocity));
 	m_Projectile.generateWind();
