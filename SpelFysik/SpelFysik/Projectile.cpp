@@ -13,8 +13,8 @@ Projectile::Projectile()
 	m_velocity = sf::Vector2f(0, 0);
 	m_startSpeed = sf::Vector2f(0, 0);
 	m_isAirbourne = false;
-	m_width = 0.1f;
-	m_mass = 8.2f;
+	m_width = ballWidth;
+	m_mass = ballMass;
 }
 
 Projectile::~Projectile()
@@ -36,10 +36,10 @@ void Projectile::Update(float dt)
 	}
 
 	// move x
-	m_Sprite.move(sf::Vector2f(1.0f, 0.0f) * m_velocity.x * dt * 2.0f);	// * 0.25 to fit the screen
+	m_Sprite.move(sf::Vector2f(1.0f, 0.0f) * m_velocity.x * dt);	// * 0.25 to fit the screen
 
 	// move y
-	m_Sprite.move(sf::Vector2f(0.0f, 1.0f) * -m_velocity.y * dt * 2.0f);
+	m_Sprite.move(sf::Vector2f(0.0f, 1.0f) * -m_velocity.y * dt);
 }
 
 sf::Vector2f Projectile::getPos()
@@ -112,6 +112,13 @@ float Projectile::calculateStartVelocity(int howMuchExplosives)
 	E_final = p * areaOfPipe * lengthOfExplosives * log((lengthOfExplosives + pipelength) / (2.0f * lengthOfExplosives));
 	finalVilocity = pow((2.0f * E_final) / m_mass, 0.5f);
 
+	/// NEW CALCULATION ///
+	float L0 = lengthOfExplosives;
+	float L100 = L0 * (p / 100000.0f);
+
+	float eFinal = E_explo * (log(pipelength / L0) / log(L100 / L0));
+	finalVilocity = pow((2.0f * eFinal) / m_mass, 0.5f);
+
 	return finalVilocity;
 }
 
@@ -174,6 +181,10 @@ void Projectile::updateVelocity(float dt)
 		m_velocity.x = (m_velocity.x + retardation.x * dt);
 		m_velocity.y = (m_velocity.y + retardation.y * dt);
 
+
+		/*
+			Replace this with correct friction calculation
+		*/
 		/// Checks ground collision 
 		if (m_Sprite.getPosition().y > 700.0f - WIDTH_OF_TEXTURE / 2.0f)
 		{
@@ -199,6 +210,7 @@ void Projectile::updateVelocity(float dt)
 			m_velocity.x = (m_velocity.x * -0.7f);
 		}
 
+	
 		/// checks if the ball has stopped 
 		if (m_velocity.x < 0.05f && m_velocity.x > -0.05f &&
 			m_velocity.y < 0.05f && m_velocity.y > -0.05f && 

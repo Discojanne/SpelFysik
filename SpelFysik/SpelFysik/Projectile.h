@@ -10,6 +10,10 @@
 #define mu 0.0000183			// viskositet luft
 #define eKoef -0.3				// krock koefficient
 
+// https://www.arc.id.au/Cannonballs.html
+#define ballWidth 0.1f			// Cannon ball width (m)
+#define ballMass 4.1f
+
 class Projectile : public sf::Drawable
 {
 public:
