@@ -150,7 +150,8 @@ float Projectile::calculateDragforce()
 
 void Projectile::generateWind()
 {
-	srand(time(0)); // This will ensure a really randomized number by help of time
+	srand(time(0)); 
+	// Generate a random wind velocity [-15 -> 15]
 	wind.x = rand() % 15 + -15;
 	wind.y = rand() % 15 + -15;
 }
