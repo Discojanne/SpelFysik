@@ -92,7 +92,7 @@ void Cannonball::updateVelocity(float dt) {
 	m_velocity += a * dt;
 
 	// move 
-	float pixelInMeters = 4.0f;
+	float pixelInMeters = pixelSize;
 	m_Sprite.move(x * pixelInMeters, -y * pixelInMeters);
 
 	/*

@@ -11,6 +11,8 @@
 #define krockKoefWall 0.01f
 #define krockKoefGround 0.2f
 
+#define pixelSize 4.0f			// meters
+
 // https://www.arc.id.au/Cannonballs.html
 #define ballWidth 0.1f			// Cannon ball width (m)
 #define ballMass 4.1f
