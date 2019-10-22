@@ -107,14 +107,14 @@ void Cannonball::updateVelocity(float dt) {
 	if (m_Sprite.getPosition().y > 700.0f - WIDTH_OF_TEXTURE / 2.0f) {
 
 		m_Sprite.setPosition(m_Sprite.getPosition().x, 700.0f - 8.01f);
-		m_velocity.y = m_velocity.y * -krockKoefGround;
+		m_velocity.y = m_velocity.y * -1 * krockKoefGround;
 		m_velocity.x = m_velocity.x * 0.9f;
 	}
 
 		// Castle
 	if (m_Sprite.getPosition().x > 1400 - 8 && m_Sprite.getPosition().x < 1410 && m_Sprite.getPosition().y < 708.0f && m_Sprite.getPosition().y > 580.0f) {
 		m_Sprite.setPosition(1400 - 8, m_Sprite.getPosition().y);
-		m_velocity.x = (m_velocity.x * -krockKoefWall);
+		m_velocity.x = (m_velocity.x * -1 * krockKoefWall);
 	}
 
 	if (m_Sprite.getPosition().x > 1400 && m_Sprite.getPosition().x < 1552.0f && m_Sprite.getPosition().y > 580.0f) {
@@ -129,7 +129,7 @@ void Cannonball::updateVelocity(float dt) {
 	*/
 
 	if (abs(m_velocity.y) < 1.0f && m_Sprite.getPosition().y > 698.0f) {
-		m_velocity.y = 0.0f;
+		m_velocity.y = 0.1f;
 		m_velocity.x *= 0.8f;
 	}
 
@@ -141,6 +141,15 @@ void Cannonball::updateVelocity(float dt) {
 			m_velocity.x = 0.0f;
 		}
 		
+	}
+
+	/*
+	Stop
+	*/
+	if (abs(m_velocity.y) < 0.001f && abs(m_velocity.x) < 0.001f && m_Sprite.getPosition().y > 690.0f) {
+		m_velocity.x = 0.0f;
+		m_velocity.y = 0.0f;
+		m_isAirbourne = false;
 	}
 
 }
