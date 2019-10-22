@@ -35,11 +35,7 @@ void Projectile::Update(float dt)
 		m_isAirbourne = true;
 	}
 
-	// move x
-	m_Sprite.move(sf::Vector2f(1.0f, 0.0f) * m_velocity.x * dt);	// * 0.25 to fit the screen
 
-	// move y
-	m_Sprite.move(sf::Vector2f(0.0f, 1.0f) * -m_velocity.y * dt);
 }
 
 sf::Vector2f Projectile::getPos()
@@ -173,55 +169,52 @@ float Projectile::getLengthOfVector(sf::Vector2f v)
 void Projectile::updateVelocity(float dt)
 {
 	float forceDrag = calculateDragforce();
-	sf::Vector2f retardation = getUnitVector(m_velocity) * -forceDrag;
-	retardation = retardation / m_mass;
-	retardation.y = (retardation.y - g);
+	sf::Vector2f a = getUnitVector(m_velocity) * -forceDrag;
+	a = a / m_mass;
+	a.y -= g;
 
-	if (m_isAirbourne)
-	{
-		m_velocity.x = (m_velocity.x + retardation.x * dt);
-		m_velocity.y = (m_velocity.y + retardation.y * dt);
+	float x = m_velocity.x * dt + a.x * dt * dt * 0.5f;
+	float y = m_velocity.y * dt + a.y * dt * dt * 0.5f;
+
+	m_velocity += a * dt;
+
+	// move 
+	m_Sprite.move(x, y);
 
 
-		/*
-			Replace this with correct friction calculation
-		*/
-		/// Checks ground collision 
-		if (m_Sprite.getPosition().y > 700.0f - WIDTH_OF_TEXTURE / 2.0f)
-		{
-			m_Sprite.setPosition(m_Sprite.getPosition().x, m_Sprite.getPosition().y - 0.3f);
-			m_velocity.y = (m_velocity.y * eKoef);
-			if (m_velocity.y < 2.0f && m_velocity.y > -2.0f)
-			{
-				m_velocity.y = (m_velocity.x * 0.6f);
-			}
-		}
 
-		/// Checks wall collision 
-		if (m_Sprite.getPosition().x > 1200 - 8 && m_Sprite.getPosition().x < 1210 && m_Sprite.getPosition().y > 100)
-		{
-			m_Sprite.setPosition(1200 - 8, m_Sprite.getPosition().y);
-			m_velocity.x = (m_velocity.x * -0.7f);
-		}
+	/*
+		Replace this with correct friction calculation
+	*/
+	//	/// Checks ground collision 
+	//if (m_Sprite.getPosition().y > 700.0f - WIDTH_OF_TEXTURE / 2.0f) {
+	//	m_Sprite.setPosition(m_Sprite.getPosition().x, m_Sprite.getPosition().y - 0.3f);
+	//	m_velocity.y = (m_velocity.y * eKoef);
+	//	if (m_velocity.y < 2.0f && m_velocity.y > -2.0f) {
+	//		m_velocity.y = (m_velocity.x * 0.6f);
+	//	}
+	//}
 
-		/// Checks wall collision2 
-		if (m_Sprite.getPosition().x < 7)
-		{
-			m_Sprite.setPosition(7.0f, m_Sprite.getPosition().y);
-			m_velocity.x = (m_velocity.x * -0.7f);
-		}
+	//	/// Checks wall collision 
+	//if (m_Sprite.getPosition().x > 1200 - 8 && m_Sprite.getPosition().x < 1210 && m_Sprite.getPosition().y > 100) {
+	//	m_Sprite.setPosition(1200 - 8, m_Sprite.getPosition().y);
+	//	m_velocity.x = (m_velocity.x * -0.7f);
+	//}
 
-	
-		/// checks if the ball has stopped 
-		if (m_velocity.x < 0.05f && m_velocity.x > -0.05f &&
-			m_velocity.y < 0.05f && m_velocity.y > -0.05f && 
-			m_Sprite.getPosition().y > 700.0f - WIDTH_OF_TEXTURE - 1.0f)
-		{
-			m_isAirbourne = false;
-			m_velocity.x = 0;
-			m_velocity.y = 0;
-		}
-	}
+	//	/// Checks wall collision2 
+	//if (m_Sprite.getPosition().x < 7) {
+	//	m_Sprite.setPosition(7.0f, m_Sprite.getPosition().y);
+	//	m_velocity.x = (m_velocity.x * -0.7f);
+	//}
+
+	//	/// checks if the ball has stopped 
+	//if (m_velocity.x < 0.05f && m_velocity.x > -0.05f &&
+	//	m_velocity.y < 0.05f && m_velocity.y > -0.05f &&
+	//	m_Sprite.getPosition().y > 700.0f - WIDTH_OF_TEXTURE - 1.0f) {
+	//	m_isAirbourne = false;
+	//	m_velocity.x = 0;
+	//	m_velocity.y = 0;
+	//}
 }
 
 void Projectile::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sstream>
-#include "Projectile.h"
+#include "Cannonball.h"
 #include <iostream>
 
 class Game : public sf::Drawable
@@ -16,7 +16,7 @@ public:
 private:
 	sf::Texture m_BackgroundTexture;
 	sf::Sprite m_BackgroundSprite;
-	Projectile m_Projectile;
+	Cannonball m_Cannonball;
 
 	sf::Text text;
 	std::ostringstream stream;
