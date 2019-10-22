@@ -80,16 +80,21 @@ float Cannonball::CalculateStartVelocity() {
 }
 
 void Cannonball::updateVelocity(float dt) {
+	// Readability
+	float t = dt;
+	sf::Vector2f v = m_velocity;
+
 
 	float forceDrag = calculateDragforce();
 	sf::Vector2f a = getUnitVector(m_velocity) * -forceDrag;
 	a = a / ballMass;
 	a.y -= g;
 
-	float x = m_velocity.x * dt + a.x * dt * dt * 0.5f;
-	float y = m_velocity.y * dt + a.y * dt * dt * 0.5f;
+	// Change in position
+	float x = v.x * t + a.x * t * t * 0.5f;
+	float y = v.y * t + a.y * t * t * 0.5f;
 
-	m_velocity += a * dt;
+	m_velocity += a * t;
 
 	// move 
 	float pixelInMeters = pixelSize;
