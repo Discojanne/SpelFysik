@@ -11,6 +11,8 @@
 #define krockKoefWall 0.01f
 #define krockKoefGround 0.2f
 
+#define grassIronFriction 0.26f  // Could not find for iron vs grass, choosed iron vs straw fiber.
+
 #define pixelSize 4.0f			// meters
 
 // https://www.arc.id.au/Cannonballs.html
@@ -34,6 +36,7 @@ public:
 private:
 
 	float CalculateStartVelocity();
+	void calculateFriction();
 	void updateVelocity(float dt);
 	
 	float getLengthOfVector(sf::Vector2f v);

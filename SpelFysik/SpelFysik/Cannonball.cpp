@@ -140,7 +140,6 @@ void Cannonball::updateVelocity(float dt) {
 		if (abs(m_velocity.x) < 1.0f) {
 			m_velocity.x = 0.0f;
 		}
-		
 	}
 
 	/*
@@ -152,6 +151,15 @@ void Cannonball::updateVelocity(float dt) {
 		m_isAirbourne = false;
 	}
 
+	if ((getPos().y - ballWidth / 2) == 700) // On the ground
+	{
+		calculateFriction();
+	}
+}
+
+void Cannonball::calculateFriction()
+{
+	m_velocity.x *= grassIronFriction;
 }
 
 float Cannonball::calculateDragforce() {
