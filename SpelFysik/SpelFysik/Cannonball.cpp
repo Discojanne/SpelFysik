@@ -122,26 +122,6 @@ void Cannonball::updateVelocity(float dt) {
 		m_velocity.y = 0.0001f;
 	}
 
-
-
-	/*
-	Eventually stop. Replace with friction
-	*/
-
-	if (abs(m_velocity.y) < 1.0f && m_Sprite.getPosition().y > 698.0f) {
-		m_velocity.y = 0.1f;
-		m_velocity.x *= 0.8f;
-	}
-
-	if (abs(m_velocity.y) < 0.01f && abs(m_velocity.x) < 5.0f && m_Sprite.getPosition().y > 690.0f) {
-
-		m_velocity.x *= 0.99f;
-
-		if (abs(m_velocity.x) < 1.0f) {
-			m_velocity.x = 0.0f;
-		}
-	}
-
 	/*
 	Stop
 	*/
