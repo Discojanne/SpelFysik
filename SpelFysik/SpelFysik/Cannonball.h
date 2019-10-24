@@ -8,8 +8,8 @@
 #define rho 1.21				// densitet luften
 #define mu 0.0000183			// viskositet luft
 
-#define krockKoefWall 0.6f // Could not find specifically for grass nor stone against iron. but found some approximations. https://en.wikipedia.org/wiki/Coefficient_of_restitution#Speeds_after_impact, under 'Predicting from material properties'
-#define krockKoefGround 0.3f
+#define krockKoefWall 0.06f // Could not find specifically for grass nor stone against iron. but found some approximations. https://en.wikipedia.org/wiki/Coefficient_of_restitution#Speeds_after_impact, under 'Predicting from material properties'
+#define krockKoefGround 0.03f
 
 #define grassIronFriction 0.26f  // Could not find for iron vs grass, choosed iron vs straw fiber.
 

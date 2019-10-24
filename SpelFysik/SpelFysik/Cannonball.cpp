@@ -151,7 +151,7 @@ void Cannonball::updateVelocity(float dt) {
 		m_isAirbourne = false;
 	}
 
-	if ((getPos().y - ballWidth / 2) == 700) // On the ground
+	if ((getPos().y - (ballWidth / 2)) == 700) // On the ground, take pos - r else we would be in the origo on the ball.
 	{
 		calculateFriction();
 	}
@@ -159,7 +159,7 @@ void Cannonball::updateVelocity(float dt) {
 
 void Cannonball::calculateFriction()
 {
-	m_velocity.x *= grassIronFriction;
+	m_velocity.x *= grassIronFriction; 
 }
 
 float Cannonball::calculateDragforce() {
